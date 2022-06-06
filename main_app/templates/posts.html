@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{% block title %} Posts {%endblock%}
+{% block content%}
+    <h1>These are posts</h1>
+    {%for post in letters%}
+    <h3>{{post.author}}</h3>
+    <h4>{{post.title}}</h4>
+    <img src="{{post.img}}" alt="{{post.author}}">
+    <p>{{post.body}}</p>
+
+    {%empty%}
+    <h3>No Posts</h3>
+    {%endfor%}
+{%endblock%}
