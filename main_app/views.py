@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from .models import Blog
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
+from django.urls import reverse
 # Create your views here.
 
 class Home(TemplateView):
@@ -38,7 +39,8 @@ class New(CreateView):
     model = Blog
     fields = ['writer','title', 'img', 'body']
     template_name = "new.html"
-    success_url = '/posts/'
+    def get_success_url(self):
+        return reverse('blog_detail', kwargs={'pk': self.object.pk})
 
 class BlogDetail(DetailView):
     model = Blog
@@ -48,4 +50,5 @@ class BlogUpdate(UpdateView):
     model = Blog
     fields =  ['writer','title', 'img', 'body']
     template_name = "blog_update.html"
-    success_url = "/posts/"
+    def get_success_url(self):
+        return reverse('blog_detail', kwargs={'pk': self.object.pk})

@@ -10,14 +10,15 @@
 <body>
     <header>
         <nav>
-            <div>
+        <div>
+            <h3>
                 <a href="/"> Home</a>
                 <a href="/posts"> Posts</a>
                 <a href="/about"> About</a>
                 <a href="{% url 'new' %}">Write</a>
-            </div>
+            </h3>
+        </div>
         </nav>
-        <div></div>
     </header>
     <div>
         {% block content %}{% endblock %}
@@ -27,7 +28,8 @@
     </footer>
     <style>
         body{
-            background-color: #c3cfe2;
+            background-color: #6b99e3;
+            text-align: center;
         }
     </style>
 </body>
