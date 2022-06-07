@@ -3,6 +3,8 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Blog
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 # Create your views here.
 
 class Home(TemplateView):
@@ -32,3 +34,12 @@ class Posts(TemplateView):
         context['Blogs'] = Blog.objects.all()
         return context
 
+class New(CreateView):
+    model = Blog
+    fields = ['writer','title', 'img', 'body']
+    template_name = "new.html"
+    success_url = '/posts/'
+
+class BlogDetail(DetailView):
+    model = Blog
+    template_name = 'blog_detail.html'
