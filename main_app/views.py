@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Blog
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
 # Create your views here.
 
@@ -43,3 +43,9 @@ class New(CreateView):
 class BlogDetail(DetailView):
     model = Blog
     template_name = 'blog_detail.html'
+
+class BlogUpdate(UpdateView):
+    model = Blog
+    fields =  ['writer','title', 'img', 'body']
+    template_name = "blog_update.html"
+    success_url = "/posts/"

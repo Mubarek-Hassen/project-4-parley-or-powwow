@@ -7,4 +7,5 @@
     <h4>{{blog.title}}</h4>
     <p>{{blog.body}}</p>
 </div>
+    <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a>
 {%endblock%}
