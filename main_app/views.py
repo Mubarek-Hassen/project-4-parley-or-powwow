@@ -32,7 +32,11 @@ class Posts(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Blogs'] = Blog.objects.all()
+        title = self.request.GET.get("title")
+        if title != None:
+            context['Blogs'] = Blog.objects.filter(title__icontains = title, user = self.request.user)
+        else:
+            context['Blogs'] = Blog.objects.filter( user = self.request.user)
         return context
 
 class New(CreateView):
