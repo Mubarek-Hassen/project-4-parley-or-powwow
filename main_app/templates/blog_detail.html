@@ -2,10 +2,11 @@
 {% block content%}
 <h3>details</h3>
 <div>
-    <img src="{{blog.img}}" alt="{{blogs.title}}" width="100%">
+    <img src="{{blog.img}}" alt="{{blogs.title}}" width="100%" height="500px">
     <h2>{{blog.writer}}</h2>
     <h4>{{blog.title}}</h4>
     <p>{{blog.body}}</p>
 </div>
     <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a>
+    <a href="{% url 'blog_delete' blog.pk %}">Delete {{blog.title}}</a>
 {%endblock%}
