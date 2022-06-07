@@ -2,13 +2,16 @@
 {% block title %} Posts {%endblock%}
 {% block content%}
     <h1>These are posts</h1>
-    {%for post in letters%}
-    <h3>{{post.author}}</h3>
+    {%for post in Blogs%}
+<div class="card">
+    <h3>{{post.writer}}</h3>
     <h4>{{post.title}}</h4>
-    <img src="{{post.img}}" alt="{{post.author}}" width="400" height="300">
+    <img src="{{post.img}}" alt="{{post.writer}}" width="400" height="300">
     <p>{{post.body}}</p>
+    <small>{{post.date}}</small>
 
     {%empty%}
     <h3>No Posts</h3>
     {%endfor%}
+</div>
 {%endblock%}
