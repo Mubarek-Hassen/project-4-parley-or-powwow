@@ -43,6 +43,9 @@ class New(CreateView):
     model = Blog
     fields = ['writer','title', 'img', 'body']
     template_name = "new.html"
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(New, self).form_valid(form)
     def get_success_url(self):
         return reverse('blog_detail', kwargs={'pk': self.object.pk})
 
