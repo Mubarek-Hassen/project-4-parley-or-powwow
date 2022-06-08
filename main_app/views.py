@@ -9,27 +9,39 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 
+# Auth
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class Home(TemplateView):
     template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Blogs'] = Blog.objects.all()
+        return context
 
 class About(TemplateView):
     template_name = "about.html"
 
 
-
+@method_decorator(login_required, name='dispatch')
 class Posts(TemplateView):
     template_name = "posts.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        title = self.request.GET.get("title")
-        if title != None:
-            context['Blogs'] = Blog.objects.filter(title__icontains = title, user = self.request.user)
-        else:
+        if self.request.user:
+            title = self.request.GET.get("title")
             context['Blogs'] = Blog.objects.filter( user = self.request.user)
-        return context
+        else:
 
+            if title != None:
+                context['Blogs'] = Blog.objects.filter(title__icontains = title, user = self.request.user)
+            else:
+                context['Blogs'] = Blog.objects.all()
+        return context
+@method_decorator(login_required, name='dispatch')
 class New(CreateView):
     model = Blog
     fields = ['writer','title', 'img', 'body']

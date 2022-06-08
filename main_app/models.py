@@ -16,3 +16,4 @@ class Blog(models.Model):
 
     class Meta:
         ordering = ['-date']
+

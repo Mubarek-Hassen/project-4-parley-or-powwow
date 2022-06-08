@@ -2,5 +2,19 @@
     {%extends 'base.html'%}
         {%block content%}
             <h1>Parley Home</h1>
+            {%for post in Blogs%}
+<div class="card">
+    <a href="{% url 'blog_detail' post.pk %}">
+    <h3 style="text-decoration: underline;">Author: {{post.writer}}</h3>
+    <h4>Article Title: {{post.title}}</h4>
+    <img src="{{post.img}}" alt="{{post.writer}}" width="400" height="300">
+    <!-- <p>{{post.body}}</p> -->
+</a> <br>
+    <small>{{post.date}}</small>
+    <hr>
+
+    {%empty%}
+    <h3>No Posts</h3>
+    {%endfor%}
 
         {%endblock%}
