@@ -7,6 +7,11 @@
     <h4>{{blog.title}}</h4>
     <p>{{blog.body}}</p>
 </div>
+{% if user.is_authenticated%}
+{% if blog.user_id == user.id %}
     <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a>
     <a href="{% url 'blog_delete' blog.pk %}">Delete {{blog.title}}</a>
+{% endif%}
+{% endif%}
+
 {%endblock%}
