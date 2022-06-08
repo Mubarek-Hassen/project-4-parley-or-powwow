@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
@@ -6,7 +8,7 @@ from .models import Blog
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
-# Create your views here.
+
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -14,17 +16,6 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = "about.html"
 
-# class Post:
-#     def __init__(self, author, title, body, img):
-#         self.author = author
-#         self.title = title
-#         self.body = body
-#         self.img = img
-
-# letters = [
-#     Post('Unknown Author', 'The Best Quote', 'Write A Wise Saying And Your Name Will Live Forever!', 'https://thomasguettler.files.wordpress.com/2021/02/wiseman.jpg'),
-#     Post('Cat', 'Purr', 'Meow Meow, Meow Meow Mew Meow, MEOW!! HISS! The End!', 'https://ih1.redbubble.net/image.3087347788.1442/st,small,507x507-pad,600x600,f8f8f8.jpg')
-# ]
 
 
 class Posts(TemplateView):
@@ -64,3 +55,19 @@ class BlogDelete(DeleteView):
     model = Blog
     template_name = 'blog_delete_confirmation.html'
     success_url = "/posts/"
+
+class SignUp(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("posts")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)

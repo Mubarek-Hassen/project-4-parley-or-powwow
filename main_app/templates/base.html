@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
     <title>{%block title%} {%endblock%}</title>
 </head>
 <body>
     <header>
-        <nav>
+        <div>
         <div>
             <h3>
-                <a href="/"> Home</a>
-                <a href="/posts"> Posts</a>
-                <a href="/about"> About</a>
-                <a href="{% url 'new' %}">Write</a>
+                <a href="/"> <button class="button"> Home</button></a>
+                <a href="/posts"><button class="button"> Posts</button></a>
+                <a href="/about"> <button class="button"> About</button></a>
+                <a href="{% url 'new' %}"> <button class="button"> Write </button> </a>
             </h3>
             {% if user.is_authenticated %}
             <div>
                 Welcome, {{user.username}} |
-                <a href="{% url 'logout'  %}">  Logout</a>
+                <a href="{% url 'logout'  %}">  <button class="button-24">Logout</button></a>
             </div>
             </div>
         </div>
         {%else%}
         <div>
-            <a href="{% url 'login' %}">Log In</a>
+            <a href="{% url 'login' %}"> <button class="button-52"> Log In </button> </a>
         </div>
         {% endif %}
         </nav>
@@ -40,7 +40,7 @@
     <style>
         html{
             height: 100%;
-            color: honeydew;
+            color: ivory;
             /* background-color: #6b99e3; */
             /* Created with https://www.css-gradient.com */
             background: #46B579;
@@ -52,6 +52,129 @@
             background-attachment: fixed;
             text-align: center;
         }
+        
+/* CSS */
+.button {
+  align-self: center;
+  background-color: #46B579;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border: black;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  /* color: ivory; */
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+
+/* CSS */
+.button-24 {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 20px;
+  outline: 0;
+  padding: 10px 10px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}
+
+/* CSS */
+.button-52 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+}
     </style>
 </body>
 </html>
+
+
+
+
