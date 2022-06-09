@@ -1,13 +1,15 @@
+# from xml.etree.ElementTree import Comment
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-from .models import Blog
+from .models import Blog, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
+from django.forms import forms
 
 # Auth
 from django.contrib.auth.decorators import login_required
@@ -83,3 +85,28 @@ class SignUp(View):
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
+
+class add_comment(CreateView):
+    model = Comment
+    fields = ['content']
+    template_name = 'commenting.html'
+
+
+    def form_valid(self, form):
+        
+        article =Blog.objects.get(pk= self.kwargs.get('pk'))
+        form.instance.article = article
+        form.instance.commentor_id = self.request.user.pk
+        return super(add_comment, self).form_valid(form)
+    def get_success_url(self):
+        article =Blog.objects.get(pk= self.kwargs.get('pk'))
+        # article =self.kwargs.get('pk')
+        return reverse('blog_detail', kwargs={'pk': article.pk})
+
+
+
+
+
+# class ShowComment(DetailView):
+#     model = Comment
+#     template_name = 'blog_detail.html'

@@ -29,8 +29,7 @@
         </div>
         {%else%}
         <div>
-            <a href="{% url 'login' %}"> <button class="button-52"> Log In </button> </a>
-            
+            <a href="{% url 'login' %}" > <button class="button-52"> Log In </button> </a> 
             <a href="{% url 'signup' %}"> <button class="button-52"> Sign Up </button> </a>
         </div>
         {% endif %}
@@ -40,7 +39,10 @@
         {% block content %}{% endblock %}
     </div>
     <footer>
-        <h5> I Am footer! </h5>
+        <a href="https://www.linkedin.com/in/mubarek-hassen-wubitu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/Mubarek-Hassen/project-4-the-parley-blog" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href=""></a>
+        <a href=""></a>
     </footer>
     <style>
         html{
@@ -145,7 +147,7 @@
   font-weight: 200;
   letter-spacing: 1px;
   padding: 13px 20px 13px;
-  margin: 5px;
+  margin: 15px;
   outline: 0;
   border: 1px solid black;
   cursor: pointer;

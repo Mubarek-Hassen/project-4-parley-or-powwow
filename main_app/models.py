@@ -15,5 +15,13 @@ class Blog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date', 'title']
 
+class Comment(models.Model):
+    content = models.TextField(max_length=2500)
+    time = models.DateTimeField(auto_now_add=True)
+    commentor = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Blog, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-time']
