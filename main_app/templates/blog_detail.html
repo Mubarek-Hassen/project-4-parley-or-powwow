@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+
 {% block content%}
 <h3>details</h3>
 <div>
@@ -10,14 +11,32 @@
 <div>
     <h3>Comments</h3>
 
-</div>
 
+    <!-- {% if blog.pk == comments.article_id %} -->
+
+    <!-- {% for comment in blog.comments.all %}
+    <span>{{forloop.counter}}</span>
+    <h2>{{ comment.content }}</h2>
+    {% endfor %} -->
+
+    <!-- {% for comment in comments %}
+    <h2>{{ comments.content }}</h2>
+    {% endfor %}
+     -->
+    <!-- {% endif %} -->
+    
+
+</div>
+<a href="{% url 'comment' blog.pk %}">Add a Comment</a> 
+<a href="{% url 'blog_comments' blog.pk %}">View Comments</a> <br>
 
 {% if user.is_authenticated%}
 {% if blog.user_id == user.id %}
-    <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a> 
-    <a href="{% url 'blog_delete' blog.pk %}">Delete {{blog.title}}</a>
+    <!-- <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a> 
+    <a href="{% url 'blog_delete' blog.pk %}">Delete {{blog.title}}</a> -->
+    <br>
 {% endif%}
 {% endif%}
+<br>
 
 {%endblock%}

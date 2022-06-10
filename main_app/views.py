@@ -1,4 +1,5 @@
 # from xml.etree.ElementTree import Comment
+from multiprocessing import context
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
@@ -37,7 +38,6 @@ class Posts(TemplateView):
             title = self.request.GET.get("title")
             context['Blogs'] = Blog.objects.filter( user = self.request.user)
         else:
-
             if title != None:
                 context['Blogs'] = Blog.objects.filter(title__icontains = title, user = self.request.user)
             else:
@@ -57,6 +57,8 @@ class New(CreateView):
 class BlogDetail(DetailView):
     model = Blog
     template_name = 'blog_detail.html'
+
+
 
 class BlogUpdate(UpdateView):
     model = Blog
@@ -100,13 +102,43 @@ class add_comment(CreateView):
         return super(add_comment, self).form_valid(form)
     def get_success_url(self):
         article =Blog.objects.get(pk= self.kwargs.get('pk'))
-        # article =self.kwargs.get('pk')
         return reverse('blog_detail', kwargs={'pk': article.pk})
 
 
 
 
 
-# class ShowComment(DetailView):
-#     model = Comment
-#     template_name = 'blog_detail.html'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # class ShowComment(DetailView):
+# #     model = Comment
+# #     template_name = 'blog_detail.html'
+# #     def get_context_data(self, **kwargs):
+# #         context = super().get_context_data(**kwargs)
+# #         context['comments'] = Comment.objects.all()
+# #         return context
+
+
+
+class ShowComment(TemplateView):
+    model = Comment
+    template_name = 'blog_comments.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.all()
+        return context
