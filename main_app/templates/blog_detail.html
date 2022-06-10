@@ -7,9 +7,16 @@
     <h2>{{blog.writer}}</h2>
     <h4>{{blog.title}}</h4>
     <p>{{blog.body}}</p>
+    
 </div>
 <div>
-    <h3>Comments</h3>
+    <h3> <strong style="text-decoration: underline;">Comments</strong></h3>
+    <p>{% for com in blog.comments.all%}</p>
+    <span> {{forloop.counter}} </span>
+    <span>{{com.content}}</span> <br>
+    <span> Commented by - {{com.commentor}} at {{com.time}}</span>
+    {% endfor %}
+
 
 
     <!-- {% if blog.pk == comments.article_id %} -->
@@ -27,10 +34,10 @@
     
 
 </div>
+{% if user.is_authenticated%}
 <a href="{% url 'comment' blog.pk %}">Add a Comment</a> 
 <a href="{% url 'blog_comments' blog.pk %}">View Comments</a> <br>
 
-{% if user.is_authenticated%}
 {% if blog.user_id == user.id %}
     <!-- <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a> 
     <a href="{% url 'blog_delete' blog.pk %}">Delete {{blog.title}}</a> -->
