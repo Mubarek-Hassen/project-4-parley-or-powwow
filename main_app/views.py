@@ -104,41 +104,21 @@ class add_comment(CreateView):
         article =Blog.objects.get(pk= self.kwargs.get('pk'))
         return reverse('blog_detail', kwargs={'pk': article.pk})
 
+class comment_form(View):
+    def post(self, request, pk):
+        commentor = self.request.user.pk
+        article = Blog.objects.get(pk = 'pk')
+        content = request.POST.get("content")
+        Comment.objects.create(commentor=commentor, article=article, content=content)
+        return redirect('blog_detail', pk = pk)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # class ShowComment(DetailView):
-# #     model = Comment
-# #     template_name = 'blog_detail.html'
-# #     def get_context_data(self, **kwargs):
-# #         context = super().get_context_data(**kwargs)
-# #         context['comments'] = Comment.objects.all()
-# #         return context
-
-
-
-class ShowComment(TemplateView):
-    model = Comment
-    template_name = 'blog_comments.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.all()
-        return context
+# class ShowComment(TemplateView):
+#     model = Comment
+#     template_name = 'blog_comments.html'
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['comments'] = Comment.objects.all()
+#         return context
