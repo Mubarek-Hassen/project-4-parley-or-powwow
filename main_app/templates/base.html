@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
     <title>{%block title%} {%endblock%}</title>
 </head>
 <body>
@@ -15,7 +17,10 @@
                 <a href="/"> <button class="button"> Home</button></a>
                 {% if user.is_authenticated %}
                 <a href="/posts"><button class="button"> Posts</button></a>
+                {% if user.is_staff %}
                 <a href="{% url 'new' %}"> <button class="button"> Write </button> </a>
+
+                {% endif %}
                 {% endif %}
                 <a href="/about"> <button class="button"> About</button></a>
                 
@@ -23,14 +28,14 @@
             {% if user.is_authenticated %}
             <div>
                 Welcome, {{user.username}} |
-                <a href="{% url 'logout'  %}">  <button class="button-24">Logout</button></a>
+                <a href="{% url 'logout'  %}" >  <button class="button-24">Logout</button></a>
             </div>
             </div>
         </div>
         {%else%}
         <div>
-            <a href="{% url 'login' %}" > <button class="button-52"> Log In </button> </a> 
-            <a href="{% url 'signup' %}"> <button class="button-52"> Sign Up </button> </a>
+          <a href="{% url 'login' %}" > <button class="button-52"> Log In </button> </a> 
+          <a href="{% url 'signup' %}"> <button class="button-52"> Sign Up </button> </a>
         </div>
         {% endif %}
         </nav>
@@ -39,28 +44,30 @@
         {% block content %}{% endblock %}
     </div>
     <footer >
-        <a href="https://www.linkedin.com/in/mubarek-hassen-wubitu/" target="_blank" rel="noopener noreferrer"> <button> LinkedIn</button></a>
-        <a href="https://github.com/Mubarek-Hassen/project-4-the-parley-blog" target="_blank" rel="noopener noreferrer"> <button> GitHub</button></a>
-        <a href=""></a>
-        <a href=""></a>
+        <a href="https://www.linkedin.com/in/mubarek-hassen-wubitu/" target="_blank" rel="noopener noreferrer"> <button class="foot"> LinkedIn</button></a>
+        <a href="https://github.com/Mubarek-Hassen/project-4-the-parley-blog" target="_blank" rel="noopener noreferrer"> <button class="foot"> GitHub</button></a>
     </footer>
-    <style>
-        html{
-            height: 100%;
-            color: ivory;
-            background: #46B579;
-            background: -webkit-linear-gradient(bottom left, #46B579, #5F2DAD);
-            background: -moz-linear-gradient(bottom left, #46B579, #5F2DAD);
-            background: linear-gradient(to top right, #46B579, #5F2DAD);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            text-align: center;
+
+<style>
+    html{
+              height: 100%;
+              color: ivory;
+              background: #46B579;
+              background: -webkit-linear-gradient(bottom left, #46B579, #5F2DAD);
+              background: -moz-linear-gradient(bottom left, #46B579, #5F2DAD);
+              background: linear-gradient(to top right, #46B579, #5F2DAD);
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-attachment: fixed;
+              text-align: center;
         }
-        
-        
-/* CSS */
-.button {
+        a{
+          margin: 5px;
+        }
+        .foot{
+          margin-bottom: 20px;
+        }
+    .button {
   align-self: center;
   background-color: #46B579;
   background-image: none;
@@ -126,6 +133,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
+  margin: 5px;
 }
 
 .button-24:hover,

@@ -111,14 +111,3 @@ class comment_form(View):
         content = request.POST.get("content")
         Comment.objects.create(commentor=commentor, article=article, content=content)
         return redirect('blog_detail', pk = pk)
-
-
-
-
-# class ShowComment(TemplateView):
-#     model = Comment
-#     template_name = 'blog_comments.html'
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['comments'] = Comment.objects.all()
-#         return context

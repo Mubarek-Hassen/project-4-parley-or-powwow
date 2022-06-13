@@ -18,5 +18,5 @@ This website is designed to be simplistic blogger heaven where they work with th
 Roles
 ![Roles](https://user-images.githubusercontent.com/102003916/171948675-ccde55cb-f923-4e7f-bd78-4d55fefb0d41.png)
 
-stack
+- Stack
 Django, Python

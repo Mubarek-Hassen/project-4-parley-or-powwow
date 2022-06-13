@@ -1,9 +1,10 @@
 {%extends 'base.html'%}
+{%block title%} {{ blog.title }} Post Detail{%endblock%}
 
 {% block content%}
 <h3>details</h3>
 <div>
-    <img src="{{blog.img}}" alt="{{blogs.title}}" width="50%" height="500px">
+    <img src="{{blog.img}}" alt="{{blogs.title}}" width="40%" height="500px">
     <h2>{{blog.writer}}</h2>
     <h4>{{blog.title}}</h4>
     <p>{{blog.body}}</p>
@@ -14,7 +15,7 @@
     <p>{% for com in blog.comments.all%}</p>
     <span> {{forloop.counter}}. </span>
     <span> Commented by - {{com.commentor}} at {{com.time}}</span> <br>
-    <span>{{com.content}}</span> <br>
+    <span><h4>{{com.content}}</h4></span>
     {% empty %}
         <h4>No Comments Yet</h4>
     {% endfor %}
@@ -22,13 +23,13 @@
 </div>
 {% if user.is_authenticated%}
 <br>
-<!-- <a href="{% url 'comment' blog.pk %}">Add a Comment</a> <br> -->
+
 <form action="{% url 'comment' blog.pk %}" method="post">
     {% csrf_token %}
     <input type="text" name="content" placeholder="share your comment">
-    <input type="submit" value="comment">
+    <input type="submit" value="Post Comment">
 
-</form>
+</form> <br>
 
 {% if blog.user_id == user.id %}
     <a href="{% url 'blog_update' blog.pk %}">Update {{blog.title}}</a> 
